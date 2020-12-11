@@ -1,6 +1,6 @@
 const graphql  = require('graphql');
-const {GraphQLObjectType, GraphQLString, GraphQLSchema,GraphQLID , GraphQLInt} = graphql;
-const_ = require('lodash');
+const {GraphQLObjectType,GraphQLList, GraphQLString, GraphQLSchema,GraphQLID , GraphQLInt} = graphql;
+const _ = require('lodash');
 
 //dummy data
 var books = [
@@ -36,7 +36,13 @@ const AuthorType = new GraphQLObjectType({
     fields: ()=>({
         id:{type: GraphQLID},
         name: {type: GraphQLString},
-        genre: {type: GraphQLString}
+        genre: {type: GraphQLString},
+        books:{
+            type: new GraphQLList(BookType),
+            resolve(parent,args) {
+                return _.filter(books,{authorId:parent.id});
+            }
+        }
     })
 });
 
