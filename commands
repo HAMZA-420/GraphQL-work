@@ -1,4 +1,5 @@
 npm init
 npm install express
 npm install nodemon(just like node command)
-nom install graphql express-graphql
+npm install graphql express-graphql
+npm install lodash (tricks to find and change data in array)
