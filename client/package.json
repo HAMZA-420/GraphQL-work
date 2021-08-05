@@ -8,8 +8,10 @@
     "@testing-library/user-event": "^12.8.3",
     "apollo-boost": "^0.4.9",
     "graphql": "^15.5.1",
+    "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-apollo": "^3.1.5",
+    "react-compose": "^2.0.0",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"

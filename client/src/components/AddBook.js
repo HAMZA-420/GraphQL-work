@@ -1,6 +1,8 @@
 import React, { Component, useState } from 'react';
 import { graphql } from 'react-apollo';
-import {getAuthorsQuery} from "../queries/queries";
+import {getAuthorsQuery, addBookMutation} from "../queries/queries";
+import {flowRight as compose} from 'lodash';
+
 
 
 function AddBook(props) {
@@ -10,7 +12,7 @@ function AddBook(props) {
 
 
     function displayAuthors(){
-        var data = props.data;
+        var data = props.getAuthorsQuery;
         if(data.loading){
             return( <option disabled>Loading authors</option> );
         } else {
@@ -22,13 +24,11 @@ function AddBook(props) {
 
     function submitForm(e) {
         e.preventDefault();
-        console.log(name)
-        console.log(genre)
-        console.log(authorId)
+        props.addBookMutation();
     }
 
         return(
-            <form id="add-book" onSubmit={submitForm.bind(this)}>
+            <form id="add-book" onSubmit={submitForm}>
                 <div className="field">
                     <label>Book name:</label>
                     <input type="text" onChange={(e) => setName(e.target.value)}/>
@@ -44,10 +44,13 @@ function AddBook(props) {
                         { displayAuthors() }
                     </select>
                 </div>
-                <button>+</button>
+                <button type="submit">+</button>
 
             </form>
         );
     }
 
-export default graphql(getAuthorsQuery)(AddBook);
+export default compose(
+    graphql(getAuthorsQuery, {name: "getAuthorsQuery"}),
+    graphql(addBookMutation, {name: "addBookMutation"})
+)(AddBook);
