@@ -2,9 +2,15 @@ const express = require('express');
 const {graphqlHTTP} = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
-
+const cors = require('cors');
 
 const app = express();
+
+
+//allow cross-origin requests
+
+app.use(cors());
+
 app.use('/graphql',graphqlHTTP({
 
     schema:schema,
@@ -12,10 +18,14 @@ app.use('/graphql',graphqlHTTP({
 
 }));
 
-mongoose.connect("mongodb+srv://Mern:Mern@cluster0.4ohke.mongodb.net/GRAPHQL-PROJECT?retryWrites=true&w=majority")
-mongoose.connection.once('open', () => {
-    console.log('connected to database');
-})
+const uri = "mongodb+srv://Mern:Mern@cluster0.4ohke.mongodb.net/GRAPHQL-PROJECT?retryWrites=true&w=majority";
+mongoose.connect(uri,{useNewUrlParser:true,useUnifiedTopology:true},
+    err => {
+        if (!err)
+            console.log('Mongodb connection succeeded.')
+        else
+            console.log('Error while connecting MongoDB : ' + JSON.stringify(err, undefined, 2))
+    })
 
 app.listen(4000,()=> {
     console.log('now listening for request on port 4000');

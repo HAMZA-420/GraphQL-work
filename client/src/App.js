@@ -1,10 +1,10 @@
-import React, {Component} from "react";
+import React from "react";
 import BookList from "./components/BookList";
 import ApolloCleint from 'apollo-boost';
 import {ApolloProvider} from "react-apollo";
 
 const client = new ApolloCleint({
-  uri: "http://localhost:4000/graphql";
+  uri: "http://localhost:4000/graphql"
 })
 
 function App() {
