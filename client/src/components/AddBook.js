@@ -24,7 +24,13 @@ function AddBook(props) {
 
     function submitForm(e) {
         e.preventDefault();
-        props.addBookMutation();
+        props.addBookMutation({
+            variables: {
+                name: name,
+                genre: genre,
+                authorId: authorId
+            }
+        });
     }
 
         return(
