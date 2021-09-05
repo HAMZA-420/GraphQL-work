@@ -18,7 +18,7 @@ app.use('/graphql',graphqlHTTP({
 
 }));
 
-const uri = "mongodb+srv://Mern:Mern@cluster0.4ohke.mongodb.net/GRAPHQL-PROJECT?retryWrites=true&w=majority";
+const uri = "Enter Url Here";
 mongoose.connect(uri,{useNewUrlParser:true,useUnifiedTopology:true},
     err => {
         if (!err)
